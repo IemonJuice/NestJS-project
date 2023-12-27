@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../../../database/entites/user.entity';
 import { Repository } from 'typeorm';
@@ -8,10 +8,14 @@ import { hash } from 'bcrypt';
 
 @Injectable()
 export class RegisterService {
-  constructor(@InjectRepository(User) private userRepository: Repository<User>, private authService: AuthService) {
-  }
+  constructor(
+    @InjectRepository(User) private userRepository: Repository<User>,
+    private authService: AuthService,
+  ) {}
 
-  async registerUser(registerUserCredentials: RegisterUserCredentials): Promise<any> {
+  async registerUser(
+    registerUserCredentials: RegisterUserCredentials,
+  ): Promise<any> {
     const existedUser: User = await this.userRepository.findOneBy({
       username: registerUserCredentials.username,
     });

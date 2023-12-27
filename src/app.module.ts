@@ -20,11 +20,11 @@ import { AuthModule } from './modules/auth/auth.module';
       load: [ormConfig],
     }),
     TypeOrmModule.forRootAsync({
-      useFactory: process.env.NODE_ENV !== 'production' ? ormConfig : ormConfigProd,
+      useFactory:
+        process.env.NODE_ENV !== 'production' ? ormConfig : ormConfigProd,
     }),
   ],
   controllers: [],
   providers: [],
 })
-export class AppModule {
-}
+export class AppModule {}

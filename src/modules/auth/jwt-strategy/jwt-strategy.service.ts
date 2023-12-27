@@ -6,18 +6,20 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
-export class JwtStrategyService  extends PassportStrategy(Strategy){
-  constructor(@InjectRepository(User) private readonly  userRepository:Repository<User>) {
+export class JwtStrategyService extends PassportStrategy(Strategy) {
+  constructor(
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
+  ) {
     super({
-      jwtFromRequest:ExtractJwt.fromAuthHeaderAsBearerToken(),
-      ignoreExpiration:false,
-      secretOrKey:'secret'
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      ignoreExpiration: false,
+      secretOrKey: 'secret',
       //TODO delete hardcoded value and put it into the environment
     });
   }
-  async validate(payload:any){
+  async validate(payload: any) {
     return await this.userRepository.findOneBy({
-      id:payload.sub,
-    })
+      id: payload.sub,
+    });
   }
 }

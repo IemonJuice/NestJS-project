@@ -15,16 +15,19 @@ import { LoginSuccessResponse } from '../../../core/models/login-success-respons
 import { RegisterUserCredentials } from '../../../core/models/register-user-credentials';
 import { RegisterService } from '../register/register.service';
 
-
 @Controller('auth')
 @SerializeOptions({ strategy: 'exposeAll' })
 export class AuthController {
-  constructor(private authService: AuthService, private registerService: RegisterService) {
-  }
+  constructor(
+    private authService: AuthService,
+    private registerService: RegisterService,
+  ) {}
 
   @Post('register')
   @UseInterceptors(ClassSerializerInterceptor)
-  async register(@Body() userCredentialsToRegister: RegisterUserCredentials): Promise<unknown> {
+  async register(
+    @Body() userCredentialsToRegister: RegisterUserCredentials,
+  ): Promise<unknown> {
     return this.registerService.registerUser(userCredentialsToRegister);
   }
 

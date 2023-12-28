@@ -2,7 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../../../database/entites/user.entity';
 import { Repository } from 'typeorm';
-import { RegisterUserCredentials } from '../../../core/models/register-user-credentials';
+import { RegisterUserCredentialsModel } from '../../../core/models/register-user-credentials.model';
 import { AuthService } from '../auth-service/auth.service';
 import { hash } from 'bcrypt';
 
@@ -14,7 +14,7 @@ export class RegisterService {
   ) {}
 
   async registerUser(
-    registerUserCredentials: RegisterUserCredentials,
+    registerUserCredentials: RegisterUserCredentialsModel,
   ): Promise<any> {
     const existedUser: User = await this.userRepository.findOneBy({
       username: registerUserCredentials.username,

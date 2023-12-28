@@ -1,6 +1,7 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { User } from '../database/entites/user.entity';
 import { Topic } from '../database/entites/topic.entity';
+import { TopicComment } from '../database/entites/comment.entity';
 
 export default (): TypeOrmModuleOptions => ({
   type: 'mysql',
@@ -10,6 +11,6 @@ export default (): TypeOrmModuleOptions => ({
   username: 'root',
   password: 'example',
   database: 'topic_io',
-  entities: [User, Topic],
+  entities: [User, Topic, TopicComment],
   synchronize: true,
 });

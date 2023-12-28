@@ -11,8 +11,8 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from '../auth-service/auth.service';
-import { LoginSuccessResponse } from '../../../core/models/login-success-response';
-import { RegisterUserCredentials } from '../../../core/models/register-user-credentials';
+import { LoginSuccessResponseModel } from '../../../core/models/login-success-response.model';
+import { RegisterUserCredentialsModel } from '../../../core/models/register-user-credentials.model';
 import { RegisterService } from '../register/register.service';
 
 @Controller('auth')
@@ -26,7 +26,7 @@ export class AuthController {
   @Post('register')
   @UseInterceptors(ClassSerializerInterceptor)
   async register(
-    @Body() userCredentialsToRegister: RegisterUserCredentials,
+    @Body() userCredentialsToRegister: RegisterUserCredentialsModel,
   ): Promise<unknown> {
     return this.registerService.registerUser(userCredentialsToRegister);
   }
@@ -34,7 +34,7 @@ export class AuthController {
   @Post('login')
   @UseInterceptors(ClassSerializerInterceptor)
   @UseGuards(AuthGuard('local'))
-  async login(@Request() request): Promise<LoginSuccessResponse> {
+  async login(@Request() request): Promise<LoginSuccessResponseModel> {
     return {
       userId: request.user.id,
       token: this.authService.getTokenForUser(request.user),

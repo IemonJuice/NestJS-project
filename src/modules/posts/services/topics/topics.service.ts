@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
-import { Topic } from '../../../core/models/topic.model';
+import { Topic } from '../../../../core/models/topic.model';
 
 @Injectable()
 export class TopicsService {
@@ -15,7 +15,7 @@ export class TopicsService {
   }
 
   async getAllTopics(): Promise<Topic[]> {
-    return await this.topicRepository.find();
+    return await this.topicRepository.find({ relations: ['comments'] });
   }
 
   async getTopicsByTitle(titleOfSearchingTopics: string) {

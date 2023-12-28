@@ -8,10 +8,8 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-
-import { TopicsService } from '../services/topics.service';
-import { Topic } from "../../../core/models/topic.model";
-
+import { TopicsService } from '../../services/topics/topics.service';
+import { Topic } from '../../../../core/models/topic.model';
 
 @Controller('topics')
 export class TopicsController {

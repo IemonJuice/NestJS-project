@@ -11,7 +11,14 @@ export class User {
   @Column()
   @Exclude()
   password: string;
-
+  @Column()
+  firstName: string;
+  @Column()
+  age: number;
+  @Column()
+  gender: string;
+  @Column()
+  email: string;
   @OneToMany(() => Topic, (topic) => topic.author)
   topics: Topic[];
 }

@@ -27,6 +27,10 @@ export class RegisterService {
     const newUser: User = new User();
     newUser.password = await hash(registerUserCredentials.password, 10);
     newUser.username = registerUserCredentials.username;
+    newUser.firstName = registerUserCredentials.firstName;
+    newUser.age = registerUserCredentials.age;
+    newUser.email = registerUserCredentials.email;
+    newUser.gender = registerUserCredentials.gender;
 
     return {
       user: await this.userRepository.save(newUser),

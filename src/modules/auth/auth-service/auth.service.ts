@@ -14,7 +14,7 @@ export class AuthService {
     });
   }
 
-  public async hasPassword(password: string): Promise<string> {
+  public async hashPassword(password: string): Promise<string> {
     return bcrypt.hash(password, 10);
   }
 }
